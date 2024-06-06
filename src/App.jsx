@@ -1,16 +1,17 @@
-// App.js
-
 import React from 'react';
-import './App.css';
-import ProfileCard from '././components/ProfileCard';
+import NavBar from './../src/components/NavBar';
+import ItemListContainer from './../src/components/ItemListContainer';
 
-export default function App() {
+const App = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-600">
-      <ProfileCard />
+    <div>
+      <NavBar />
+      <ItemListContainer />
     </div>
   );
 }
+
+export default App;
 
 
 
