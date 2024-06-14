@@ -9,10 +9,10 @@ const NavBar = () => {
         <div className="flex items-center">
           <Logo />
           <div className="flex space-x-4 ml-10">
-            <MenuItem href="#productos" text="Productos" />
-            <MenuItem href="#testimonios" text="Testimonios" />
-            <MenuItem href="#nosotros" text="Nosotros" />
-            <MenuItem href="#blog" text="Blog" />
+            <MenuItem href="Libros" text="Productos" />
+            <MenuItem href="#Kits" text="Testimonios" />
+            <MenuItem href="#Velas" text="Nosotros" />
+            <MenuItem href="#Ropa" text="Blog" />
           </div>
         </div>
         <div className="flex items-center mr-10">
