@@ -13,7 +13,11 @@ module.exports = {
         accent: '#0000FF',
         // Añade más colores según sea necesario
       },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'], // Añade Poppins como la fuente sans-serif predeterminada
+      },
     },
   },
   plugins: [],
 }
+
