@@ -4,7 +4,7 @@ const products =[
       name: "Producto 1",
       description: "descripción 1",
       stock: 5,
-      category: "Plantas",
+      category: "plantas",
       price: 200
     },
     {
@@ -12,7 +12,7 @@ const products =[
       name: "Producto 2",
       description: "descripción 2",
       stock: 10,
-      category: "Libros",
+      category: "libros",
       price: 300
     },
     {
@@ -20,7 +20,7 @@ const products =[
       name: "Producto 1",
       description: "descripción 3",
       stock: 2,
-      category: "Velas",
+      category: "velas",
       price: 400
     },
   ]
@@ -30,7 +30,7 @@ const products =[
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(products);
-      }, 3000);
+      }, 1000);
     });
   };
 
