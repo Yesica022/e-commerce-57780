@@ -11,6 +11,7 @@ module.exports = {
         primary: '#008F8C',
         secondary: '#00FF00',
         accent: '#0000FF',
+        span: "#008F8C",
         // Añade más colores según sea necesario
       },
       fontFamily: {

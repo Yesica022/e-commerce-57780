@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductSection = () => {
   return (
@@ -10,36 +11,37 @@ const ProductSection = () => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Card 1 */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <Link to="/categoria/libros" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
           <img src="/src/img/Books.png" alt="Libros" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Libros</p>
           </div>
-        </div>
+        </Link>
         {/* Card 2 */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <Link to="/categoria/kits" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
           <img src="/src/img/Kits.png" alt="Kits de relajación" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Kits de relajación</p>
           </div>
-        </div>
+        </Link>
         {/* Card 3 */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <Link to="/categoria/accesorios" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
           <img src="/src/img/Accesories.png" alt="Accesorios" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Accesorios</p>
           </div>
-        </div>
+        </Link>
         {/* Card 4 */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <Link to="/categoria/alimentacion" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
           <img src="/src/img/Health Food.png" alt="Alimentación sana" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Alimentación sana</p>
           </div>
-        </div>
+        </Link>
       </div>
     </section>
   );
 }
 
 export default ProductSection;
+
