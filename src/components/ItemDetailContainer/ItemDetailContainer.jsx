@@ -9,27 +9,34 @@ const ItemDetailContainer = () => {
     useEffect(() => {
         getProducts()
             .then((data) => {
-                // Encuentra el producto con el id correspondiente
                 const filteredProduct = data.find((dataProduct) => dataProduct.id === idProduct);
-                setProduct(filteredProduct); // Establece el producto filtrado en el estado
+                setProduct(filteredProduct);
             })
             .catch((error) => {
                 console.error('Error fetching products:', error);
             });
-    }, [idProduct]); // Añade idProduct como dependencia para actualizar cuando cambia
+    }, [idProduct]);
 
     return (
-        <div>
-            <h2>ItemDetailContainer</h2>
-            <p>ID del producto: {product?.id}</p>
-            <p>Nombre del producto: {product?.name}</p>
-            <p>Descripción: {product?.description}</p>
-            <p>Stock: {product?.stock}</p>
-            <p>Categoría: {product?.category}</p>
-            <p>Precio: {product?.price}</p>
+        <div className="container mx-auto px-4 py-8">
+            <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+                <div className="md:flex">
+                    <div className="md:flex-shrink-0">
+                        <img className="h-48 w-full object-cover md:w-48" src={product.image} alt={product.name} />
+                    </div>
+                    <div className="p-8">
+                        <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{product.category}</div>
+                        <h2 className="block mt-1 text-lg leading-tight font-medium text-black">{product.name}</h2>
+                        <p className="mt-2 text-gray-500">{product.description}</p>
+                        <p className="mt-2 text-gray-500">Stock: {product.stock}</p>
+                        <p className="mt-2 text-gray-500">Precio: {product.price}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
 
 export default ItemDetailContainer;
+
 

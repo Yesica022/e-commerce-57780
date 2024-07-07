@@ -33,8 +33,8 @@ const ItemListContainer = ({ greeting }) => {
   }, [idCategory]); // Añade idCategory como dependencia para actualizar cuando cambia
 
   return (
-    <div className="container mx-auto mt-4 p-4">
-      <h2>{greeting}</h2>
+    <div className="container mx-auto mt-4 p-4 mb-28">
+         <h2 className="text-2xl font-medium text-teal-600 mb-10">{greeting}</h2>
       {isLoading ? <Loading /> : <ItemList products={products} />}
     </div>
   );

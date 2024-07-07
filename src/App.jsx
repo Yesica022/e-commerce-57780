@@ -1,23 +1,25 @@
-// src/App.jsx
 import React from "react";
-import NavBar from "./../src/components/NavBar/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import Banner from "./components/Banner/Banner";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
 import ProductSection from "./components/ProductSection/ProductSection";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
     <BrowserRouter>
       <NavBar />
-      <Banner />
-      <ProductSection />
       <Routes>
         <Route
           path="/"
-          element={<ItemListContainer greeting="Welcome to our store!" />}
+          element={
+            <>
+              <Banner />
+              <ProductSection />
+              <ItemListContainer greeting="Productos más vendidos" />
+            </>
+          }
         />
         <Route
           path="/categoria/:idCategory"
