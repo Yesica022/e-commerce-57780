@@ -11,7 +11,7 @@ const Item = ({ product }) => {
         />
       </div>
       <div className="px-6 py-2 flex-grow">
-        <p className="text-base text-primary mb-2">{product.category}</p>
+        <p className="text-sm text-primary uppercase font-semibold mb-2">{product.category}</p>
         <p className="text-lg font-medium mb-2">{product.name}</p>
         <p className="text-gray-700 text-base mb-4">{product.description}</p>
         <p className="text-lg font-medium text-span">
