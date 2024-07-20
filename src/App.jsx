@@ -5,6 +5,7 @@ import ItemListContainer from "./components/ItemListContainer/ItemListContainer"
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
 import ProductSection from "./components/ProductSection/ProductSection";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CounterExample from "./components/Examples/CounterExample"; // Importación corregida
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           element={<ItemListContainer greeting="" />}
         />
         <Route path="/detalle/:idProduct" element={<ItemDetailContainer />} />
+        <Route path="/examples" element={<CounterExample />} />
       </Routes>
     </BrowserRouter>
   );
