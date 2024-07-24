@@ -33,6 +33,10 @@ const ItemDetailContainer = () => {
     console.log(`Added ${quantity} items to cart`);
   };
 
+  const addCar = (count) => {
+    console.log(`Added ${count} items to cart`);
+  }
+
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -60,10 +64,7 @@ const ItemDetailContainer = () => {
               <p className="mt-2 text-gray-600">{product.description}</p>
               <p className="mt-2 text-gray-600">Stock: {product.stock}</p>
               <p className="mt-2 text-gray-600">Precio: {product.price}</p>
-              <ItemCount stock={product.stock} initial={1} onAdd={handleAddToCart} />
-              <button className="mt-4 inline-block px-6 py-2 border-2 border-teal-600 text-teal-600 font-medium text-sm leading-tight rounded-lg hover:bg-teal-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
-                Agregar al carrito
-              </button>
+              <ItemCount stock={product.stock} initial={1} onAdd={handleAddToCart} addCar={addCar} />
             </div>
           </div>
         </div>
@@ -76,4 +77,3 @@ const ItemDetailContainer = () => {
 };
 
 export default ItemDetailContainer;
-
