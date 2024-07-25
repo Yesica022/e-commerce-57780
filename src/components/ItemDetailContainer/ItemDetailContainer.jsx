@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../data/data.js";
 import RelatedProducts from "../RelatedProducts/RelatedProducts.jsx";
+import { CartContext } from "../../context/CartContext.jsx";
 import ItemCount from "../ItemCount/ItemCount.jsx";
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const { idProduct } = useParams();
+  const { addCart } = useContext(CartContext);
 
   useEffect(() => {
     getProducts()
@@ -30,13 +32,13 @@ const ItemDetailContainer = () => {
   }, [idProduct]);
 
   const handleAddToCart = (quantity) => {
-    console.log(`Added ${quantity} items to cart`);
+    const productToAdd = {
+      ...product,
+      quantity: quantity,
+    };
+    addCart(productToAdd);
+    console.log(`Added ${quantity} items of ${product.name} to cart`);
   };
-
-  const addCar = (count) => {
-    console.log(`Added ${count} items to cart`);
-  }
-
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -64,7 +66,11 @@ const ItemDetailContainer = () => {
               <p className="mt-2 text-gray-600">{product.description}</p>
               <p className="mt-2 text-gray-600">Stock: {product.stock}</p>
               <p className="mt-2 text-gray-600">Precio: {product.price}</p>
-              <ItemCount stock={product.stock} initial={1} onAdd={handleAddToCart} addCar={addCar} />
+              <ItemCount
+                stock={product.stock}
+                initial={1}
+                onAdd={handleAddToCart}
+              />
             </div>
           </div>
         </div>
