@@ -11,10 +11,12 @@ export const CartProvider = ({ children }) => {
   };
 
   const totalQuantify = () => {
-
-const quantity = cart.reduce(( total, product) => total + product.quantity, 0)
-return quantity
-  }
+    const quantity = cart.reduce(
+      (total, product) => total + product.quantity,
+      0
+    );
+    return quantity;
+  };
 
   return (
     <CartContext.Provider value={{ cart, addCart, totalQuantify }}>
@@ -22,4 +24,3 @@ return quantity
     </CartContext.Provider>
   );
 };
-
