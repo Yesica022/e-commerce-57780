@@ -1,12 +1,11 @@
-//Importaciones de librerias
+// Importaciones de librerías
 import React, { useContext } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { CartContext } from "../../context/CartContext";
 
-//Componente que muestra el icono del carrito
+// Componente que muestra el icono del carrito
 const CartWidget = () => {
-  const { cart } = useContext(CartContext); // Obtenemos el carrito del contexto
-  const { totalQuantify} = useContext(CartContext);
+  const { cart, totalQuantity } = useContext(CartContext); // Obtenemos el carrito y totalQuantity del contexto
 
   return (
     <div className="relative flex items-center lg:mr-6 xl:mr-8">
@@ -15,10 +14,11 @@ const CartWidget = () => {
         style={{ fontSize: 35 }}
       />
       <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
-       {totalQuantify()}
+       {totalQuantity()}
       </span>
     </div>
   );
 };
 
 export default CartWidget;
+
