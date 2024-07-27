@@ -1,49 +1,57 @@
 import { CartContext } from "../../context/CartContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa";
 
 // Componente principal del carrito
 const Cart = () => {
   // Extraer valores del contexto del carrito
   const { cart, removeItem, emptyCart, totalPrice } = useContext(CartContext);
 
+  // Retorno temprano si el carrito está vacío
+  if (cart.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <img src="/src/img/emptyCart.jpg" alt="Carrito vacío" className="w-64 h-auto mb-4" />
+        <p className="text-center text-xl font-semibold text-gray-600">Por acá no hay nada 🥲</p>
+        <Link to="/" className="inline-block mt-8 px-6 py-2 border-2 border-teal-600 text-teal-600 font-medium text-sm leading-tight rounded-lg hover:bg-teal-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+          Ir a los productos
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-12">
-      {cart.length > 0 ? (
-        <>
-          {/* Mapear sobre los productos en el carrito y renderizar cada uno */}
-          {cart.map((cartProduct) => (
-            <CartItem
-              key={cartProduct.id}
-              product={cartProduct}
-              removeItem={removeItem}
-            />
-          ))}
-          {/* Sección de total y botones */}
-          <div className="text-center mt-8">
-            <p className="text-lg font-semibold mb-4">
-              Precio Total: {formatPrice(totalPrice())}
-            </p>
-            <div className="flex justify-center space-x-4">
-              <button
-                onClick={emptyCart}
-                className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-300"
-                aria-label="Vaciar carrito"
-              >
-                Vaciar carrito
-              </button>
-              <button
-                className="inline-block px-6 py-2 border-2 border-teal-600 text-teal-600 font-medium text-sm leading-tight rounded-lg hover:bg-teal-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                aria-label="Continuar con la compra"
-              >
-                Continuar con la compra
-              </button>
-            </div>
-          </div>
-        </>
-      ) : (
-        // Mensaje si el carrito está vacío
-        <p className="text-center text-gray-500">Tu carrito está vacío</p>
-      )}
+      {/* Mapear sobre los productos en el carrito y renderizar cada uno */}
+      {cart.map((cartProduct) => (
+        <CartItem
+          key={cartProduct.id}
+          product={cartProduct}
+          removeItem={removeItem}
+        />
+      ))}
+      {/* Sección de total y botones */}
+      <div className="text-center mt-8">
+        <p className="text-lg font-semibold mb-4">
+          Precio Total: {formatPrice(totalPrice())}
+        </p>
+        <div className="flex justify-center space-x-4">
+          <button
+            onClick={emptyCart}
+            className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-300"
+            aria-label="Vaciar carrito"
+          >
+            Vaciar carrito
+          </button>
+          <button
+            className="inline-flex items-center px-6 py-2 border-2 border-teal-600 text-teal-600 font-medium text-sm leading-tight rounded-lg hover:bg-teal-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            aria-label="Continuar con la compra"
+          >
+            Continuar con la compra <FaArrowRight className="ml-2" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -89,3 +97,4 @@ const formatPrice = (price) => {
 };
 
 export default Cart;
+

@@ -6,7 +6,9 @@ import { CartContext } from "../../context/CartContext";
 
 // Componente que muestra el icono del carrito
 const CartWidget = () => {
-  const { cart, totalQuantity } = useContext(CartContext); // Obtenemos el carrito y totalQuantity del contexto
+  const { totalQuantity } = useContext(CartContext); // Obtenemos totalQuantity del contexto
+
+  const quantity = totalQuantity(); // Obtenemos la cantidad total de productos en el carrito
 
   return (
     <Link to="/carrito" className="relative flex items-center lg:mr-6 xl:mr-8">
@@ -14,9 +16,11 @@ const CartWidget = () => {
         className="text-gray-800 hover:text-teal-600 transition duration-300 ease-in-out"
         style={{ fontSize: 35 }}
       />
-      <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
-        {totalQuantity()}
-      </span>
+      {quantity > 0 && (
+        <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+          {quantity}
+        </span>
+      )}
     </Link>
   );
 };

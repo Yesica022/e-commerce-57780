@@ -40,7 +40,11 @@ const ItemDetailContainer = () => {
     console.log(`Added ${quantity} items of ${product.name} to cart`);
   };
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="text-teal-600 text-xl font-regular animate-pulse">Cargando...</div>
+      </div>
+    );
   }
 
   return (

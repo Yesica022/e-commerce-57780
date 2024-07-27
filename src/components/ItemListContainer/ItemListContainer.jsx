@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useLoading from "../../hooks/useLoading";
 import { getProducts } from "../../data/data";
 import ItemList from "./ItemList";
-import Loading from "../loading/Loading";
+
 
 const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]); // Estado para almacenar los productos
@@ -34,12 +34,17 @@ const ItemListContainer = ({ greeting }) => {
 
   return (
     <div className="container mx-auto mt-4 p-6 mb-28 ">
-         <h2 className="text-2xl font-medium text-teal-600 mb-10">{greeting}</h2>
-      {isLoading ? <Loading /> : <ItemList products={products} />}
+      <h2 className="text-2xl font-medium text-teal-600 mb-10">{greeting}</h2>
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="text-teal-600 text-xl font-regular animate-pulse">Cargando...</div>
+        </div>
+      ) : (
+        <ItemList products={products} />
+      )}
     </div>
   );
 };
 
 export default ItemListContainer;
-
 
