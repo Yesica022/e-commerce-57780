@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts } from "../../data/data.js";
 import RelatedProducts from "../RelatedProducts/RelatedProducts.jsx";
 import { CartContext } from "../../context/CartContext.jsx";
 import ItemCount from "../ItemCount/ItemCount.jsx";
+import db from "../../db/db.js";
+import { doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState(null);
@@ -11,25 +12,44 @@ const ItemDetailContainer = () => {
   const { idProduct } = useParams();
   const { addCart } = useContext(CartContext);
 
-  useEffect(() => {
-    getProducts()
-      .then((data) => {
-        const filteredProduct = data.find(
-          (dataProduct) => dataProduct.id === idProduct
-        );
-        setProduct(filteredProduct);
+  // Función para obtener el producto específico
+  const getProduct = async () => {
+    const docRef = doc(db, "products", idProduct);
+    try {
+      const respuesta = await getDoc(docRef);
+      if (respuesta.exists()) {
+        const data = { id: respuesta.id, ...respuesta.data() };
+        setProduct(data);
+        // Lógica para obtener productos relacionados
+        getRelatedProducts(data.category);
+      } else {
+        console.error("Producto no encontrado");
+      }
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    }
+  };
 
-        const related = data.filter(
-          (dataProduct) =>
-            dataProduct.category === filteredProduct.category &&
-            dataProduct.id !== filteredProduct.id
-        );
-        setRelatedProducts(related);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
-  }, [idProduct]);
+  // Función para obtener productos relacionados
+  const getRelatedProducts = async (category) => {
+    const productsRef = collection(db, "products");
+    const q = query(productsRef, where("category", "==", category));
+    try {
+      const respuesta = await getDocs(q);
+      const productos = respuesta.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      // Filtrar productos relacionados para excluir el producto actual
+      setRelatedProducts(productos.filter((p) => p.id !== idProduct));
+    } catch (error) {
+      console.error("Error fetching related products:", error);
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, [idProduct]); // Ejecuta cuando idProduct cambia
 
   const handleAddToCart = (quantity) => {
     const productToAdd = {
@@ -39,10 +59,13 @@ const ItemDetailContainer = () => {
     addCart(productToAdd);
     console.log(`Added ${quantity} items of ${product.name} to cart`);
   };
+
   if (!product) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-teal-600 text-xl font-regular animate-pulse">Cargando...</div>
+        <div className="text-teal-600 text-xl font-regular animate-pulse">
+          Cargando...
+        </div>
       </div>
     );
   }

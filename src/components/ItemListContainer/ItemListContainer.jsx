@@ -1,43 +1,70 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useLoading from "../../hooks/useLoading";
-import { getProducts } from "../../data/data";
 import ItemList from "./ItemList";
-
+import db from "../../db/db.js";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]); // Estado para almacenar los productos
   const { idCategory } = useParams(); // Extrae el parámetro idCategory
   const { isLoading, showLoading, hideLoading } = useLoading(); // Usa el hook useLoading
 
-  useEffect(() => {
-    showLoading(); // Muestra el estado de carga al iniciar la solicitud
+  const getProducts = async () => {
+    showLoading();
+    const productsRef = collection(db, "products");
+    try {
+      const respuesta = await getDocs(productsRef);
 
-    getProducts()
-      .then((response) => {
-        // Filtra los productos según la categoría si idCategory está presente
-        if (idCategory) {
-          const lowerCaseCategory = idCategory.toLowerCase(); // Convierte a minúsculas
-          const filteredProducts = response.filter(product => product.category.toLowerCase() === lowerCaseCategory);
-          setProducts(filteredProducts); // Establece los productos filtrados
-        } else {
-          setProducts(response); // Establece todos los productos al inicio
-        }
-      })
-      .catch((error) => {
-        console.error(error); // Log de error si la promesa se rechaza
-      })
-      .finally(() => {
-        hideLoading(); // Oculta el estado de carga al finalizar la solicitud
-      });
+      const productos = respuesta.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setProducts(productos);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      hideLoading();
+    }
+  };
+
+  const getProductsFilters = async () => {
+    showLoading();
+    const productsRef = collection(db, "products");
+    const q = query(productsRef, where("category", "==", idCategory));
+    try {
+      const respuesta = await getDocs(q);
+
+      const productos = respuesta.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setProducts(productos);
+    } catch (error) {
+      console.error("Error fetching filtered products:", error);
+    } finally {
+      hideLoading();
+    }
+  };
+
+  useEffect(() => {
+    if (idCategory) {
+      getProductsFilters();
+    } else {
+      getProducts();
+    }
   }, [idCategory]); // Añade idCategory como dependencia para actualizar cuando cambia
 
   return (
-    <div className="container mx-auto mt-4 p-6 mb-28 ">
+    <div className="container mx-auto mt-4 p-6 mb-28">
       <h2 className="text-2xl font-medium text-teal-600 mb-10">{greeting}</h2>
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="text-teal-600 text-xl font-regular animate-pulse">Cargando...</div>
+          <div className="text-teal-600 text-xl font-regular animate-pulse">
+            Cargando...
+          </div>
         </div>
       ) : (
         <ItemList products={products} />
@@ -47,4 +74,3 @@ const ItemListContainer = ({ greeting }) => {
 };
 
 export default ItemListContainer;
-
