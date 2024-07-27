@@ -33,14 +33,15 @@ export const CartProvider = ({ children }) => {
 
   // Calcular la cantidad total de productos en el carrito
   const totalQuantity = () => {
-    const quantity = cart.reduce(
-      (total, product) => total + product.quantity,
-      0
-    );
+    const quantity = cart.reduce((total, product) => total + product.quantity, 0);
     return quantity;
   };
 
   // Calcular el precio total del carrito de compras
+  const totalPrice = () => {
+    const price = cart.reduce((total, product) => total + (product.price * product.quantity), 0);
+    return price;
+  };
 
   // Vaciar el carrito
   const emptyCart = () => {
@@ -57,7 +58,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addCart, totalQuantity, emptyCart, removeItem }}
+      value={{ cart, addCart, totalQuantity, emptyCart, removeItem, totalPrice }}
     >
       {children}
     </CartContext.Provider>
