@@ -23,7 +23,6 @@ export const CartProvider = ({ children }) => {
       });
       setCart(modifiedProducts);
     }
-    console.log("Current cart:", cart);
   };
 
   // Verificar si el producto está en el carrito

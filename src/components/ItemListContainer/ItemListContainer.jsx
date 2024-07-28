@@ -1,3 +1,4 @@
+// Importaciones de React y Hooks
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useLoading from "../../hooks/useLoading";
@@ -6,10 +7,16 @@ import db from "../../db/db.js";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = ({ greeting }) => {
-  const [products, setProducts] = useState([]); // Estado para almacenar los productos
-  const { idCategory } = useParams(); // Extrae el parámetro idCategory
-  const { isLoading, showLoading, hideLoading } = useLoading(); // Usa el hook useLoading
+  // Estado para almacenar los productos
+  const [products, setProducts] = useState([]);
 
+  // Hook para obtener el parámetro de la URL
+  const { idCategory } = useParams();
+
+  // Hook personalizado para manejar el estado de carga
+  const { isLoading, showLoading, hideLoading } = useLoading();
+
+  // Función para obtener todos los productos
   const getProducts = async () => {
     showLoading();
     const productsRef = collection(db, "products");
@@ -23,12 +30,13 @@ const ItemListContainer = ({ greeting }) => {
 
       setProducts(productos);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error al obtener productos: ", error);
     } finally {
       hideLoading();
     }
   };
 
+  // Función para obtener productos filtrados por categoría
   const getProductsFilters = async () => {
     showLoading();
     const productsRef = collection(db, "products");
@@ -43,19 +51,20 @@ const ItemListContainer = ({ greeting }) => {
 
       setProducts(productos);
     } catch (error) {
-      console.error("Error fetching filtered products:", error);
+      console.error("Error al obtener productos filtrados: ", error);
     } finally {
       hideLoading();
     }
   };
 
+  // Hook useEffect para cargar los productos cuando cambia idCategory
   useEffect(() => {
     if (idCategory) {
       getProductsFilters();
     } else {
       getProducts();
     }
-  }, [idCategory]); // Añade idCategory como dependencia para actualizar cuando cambia
+  }, [idCategory]); // Dependencia: idCategory
 
   return (
     <div className="container mx-auto mt-4 p-6 mb-28">

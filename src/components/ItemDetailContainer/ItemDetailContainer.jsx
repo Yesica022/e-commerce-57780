@@ -23,10 +23,10 @@ const ItemDetailContainer = () => {
         // Lógica para obtener productos relacionados
         getRelatedProducts(data.category);
       } else {
-        console.error("Producto no encontrado");
+       
       }
     } catch (error) {
-      console.error("Error fetching product:", error);
+     
     }
   };
 
@@ -43,7 +43,7 @@ const ItemDetailContainer = () => {
       // Filtrar productos relacionados para excluir el producto actual
       setRelatedProducts(productos.filter((p) => p.id !== idProduct));
     } catch (error) {
-      console.error("Error fetching related products:", error);
+     
     }
   };
 
@@ -57,7 +57,7 @@ const ItemDetailContainer = () => {
       quantity: quantity,
     };
     addCart(productToAdd);
-    console.log(`Added ${quantity} items of ${product.name} to cart`);
+   
   };
 
   if (!product) {

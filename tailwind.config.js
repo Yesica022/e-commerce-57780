@@ -7,18 +7,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Define tus colores personalizados aquí
         primary: '#008F8C',
         secondary: '#00FF00',
         accent: '#0000FF',
         span: "#008F8C",
-        // Añade más colores según sea necesario
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'], // Añade Poppins como la fuente sans-serif predeterminada
+        sans: ['Poppins', 'sans-serif'],
       },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.5s ease-in-out'
+      }
     },
   },
   plugins: [],
 }
-
