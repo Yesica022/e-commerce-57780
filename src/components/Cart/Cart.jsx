@@ -44,12 +44,12 @@ const Cart = () => {
           >
             Vaciar carrito
           </button>
-          <button
+          <Link to="/checkout"
             className="inline-flex items-center px-6 py-2 border-2 border-teal-600 text-teal-600 font-medium text-sm leading-tight rounded-lg hover:bg-teal-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             aria-label="Continuar con la compra"
           >
             Continuar con la compra <FaArrowRight className="ml-2" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

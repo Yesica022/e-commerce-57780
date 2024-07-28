@@ -11,28 +11,28 @@ const ProductSection = () => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Card 1 */}
-        <Link to="/categoria/libros" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <Link to="/categoria/libros" className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 hover:shadow-xl transition-transform duration-300 ease-in-out">
           <img src="/src/img/Books.png" alt="Libros" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Libros</p>
           </div>
         </Link>
         {/* Card 2 */}
-        <Link to="/categoria/kits" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <Link to="/categoria/kits" className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 hover:shadow-xl transition-transform duration-300 ease-in-out">
           <img src="/src/img/Kits.png" alt="Kits de relajación" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Kits de relajación</p>
           </div>
         </Link>
         {/* Card 3 */}
-        <Link to="/categoria/accesorios" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <Link to="/categoria/accesorios" className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 hover:shadow-xl transition-transform duration-300 ease-in-out">
           <img src="/src/img/Accesories.png" alt="Accesorios" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Accesorios</p>
           </div>
         </Link>
         {/* Card 4 */}
-        <Link to="/categoria/alimentacion" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <Link to="/categoria/alimentacion" className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 hover:shadow-xl transition-transform duration-300 ease-in-out">
           <img src="/src/img/Health Food.png" alt="Alimentación sana" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Alimentación sana</p>
@@ -44,4 +44,5 @@ const ProductSection = () => {
 }
 
 export default ProductSection;
+
 
