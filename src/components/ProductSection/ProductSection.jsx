@@ -12,7 +12,7 @@ const ProductSection = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Card 1 */}
         <Link to="/categoria/libros" className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 hover:shadow-xl transition-transform duration-300 ease-in-out">
-          <img src="/src/img/Books.png" alt="Libros" className="w-full h-48 object-cover" />
+          <img src="/src/img/books.png" alt="Libros" className="w-full h-48 object-cover" />
           <div className="p-4 text-center">
             <p className="text-lg">Libros</p>
           </div>
