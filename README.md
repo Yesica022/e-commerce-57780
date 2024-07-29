@@ -33,5 +33,5 @@
 1. **Clona el repositorio:**
 
    ```bash
-   git clone https://github.com/tu-usuario/ecommerce-serendipia.git
+   git clone https://github.com/Yesica022/e-commerce-57780.git 
 
