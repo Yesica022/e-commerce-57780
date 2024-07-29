@@ -15,6 +15,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailCont
 import ProductSection from "./components/ProductSection/ProductSection";
 import Cart from "./components/Cart/Cart";
 import Checkout from "./components/Checkout/Checkout";
+import NotFound from "./components/NotFound/NotFound"; 
 
 const App = () => {
   return (
@@ -40,6 +41,8 @@ const App = () => {
           <Route path="/detalle/:idProduct" element={<ItemDetailContainer />} />
           <Route path="/carrito" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/404" element={<NotFound />} /> 
+          <Route path="*" element={<NotFound />} /> 
         </Routes>
       </CartProvider>
     </BrowserRouter>

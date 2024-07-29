@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import RelatedProducts from "../RelatedProducts/RelatedProducts.jsx";
 import { CartContext } from "../../context/CartContext.jsx";
 import ItemCount from "../ItemCount/ItemCount.jsx";
@@ -11,6 +11,7 @@ const ItemDetailContainer = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const { idProduct } = useParams();
   const { addCart } = useContext(CartContext);
+  const navigate = useNavigate(); // Hook para navegación programática
 
   // Función para obtener el producto específico
   const getProduct = async () => {
@@ -23,10 +24,10 @@ const ItemDetailContainer = () => {
         // Lógica para obtener productos relacionados
         getRelatedProducts(data.category);
       } else {
-       
+        navigate("/404"); // Navegar a la página de error 404 si el producto no existe
       }
     } catch (error) {
-     
+      navigate("/404"); // Navegar a la página de error 404 en caso de error
     }
   };
 
@@ -43,7 +44,7 @@ const ItemDetailContainer = () => {
       // Filtrar productos relacionados para excluir el producto actual
       setRelatedProducts(productos.filter((p) => p.id !== idProduct));
     } catch (error) {
-     
+      // Manejo del error
     }
   };
 
@@ -57,7 +58,6 @@ const ItemDetailContainer = () => {
       quantity: quantity,
     };
     addCart(productToAdd);
-   
   };
 
   if (!product) {
