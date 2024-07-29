@@ -1,9 +1,12 @@
-import { string, object, mixed } from "yup";
+import { string, object, mixed, ref } from "yup";
 
 let userSchema = object({
     nombre: string().required("El nombre es requerido"),
     telefono: mixed().required("El teléfono es requerido"),
-    correo: string().email("Ingresa un correo válido").required("El correo es requerido")
+    correo: string().email("Ingresa un correo válido").required("El correo es requerido"),
+    confirmarCorreo: string()
+        .oneOf([ref('correo'), null], "Los correos deben coincidir")
+        .required("La confirmación de correo es requerida")
 });
 
 const validateForm = async (dataForm) => {

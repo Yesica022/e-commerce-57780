@@ -1,4 +1,4 @@
-const Form = ({ datosForm, saveDataInput, enviarOrden }) => {
+const Form = ({ datosForm, saveDataInput, enviarOrden, isFormValid }) => {
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg text-left">
       <form onSubmit={enviarOrden} className="space-y-6">
@@ -38,9 +38,24 @@ const Form = ({ datosForm, saveDataInput, enviarOrden }) => {
             placeholder="Ingresa tu correo electrónico"
           />
         </div>
+        <div className="flex flex-col">
+          <label htmlFor="confirmarCorreo" className="text-gray-700 font-semibold mb-2">Confirmar Correo</label>
+          <input
+            id="confirmarCorreo"
+            type="text"
+            name="confirmarCorreo"
+            value={datosForm.confirmarCorreo}
+            onChange={saveDataInput}
+            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Confirma tu correo electrónico"
+          />
+        </div>
         <button
           type="submit"
-          className="w-full py-2 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
+          className={`w-full py-2 font-regular rounded-lg transition-colors ${
+            isFormValid ? 'bg-primary text-white hover:bg-primary-dark' : 'bg-gray-200 text-gray-700 cursor-not-allowed'
+          }`}
+          disabled={!isFormValid}
         >
           Enviar orden
         </button>

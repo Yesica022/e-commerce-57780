@@ -1,5 +1,5 @@
 // Importaciones de React y Hooks
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Importaciones de componentes y utilidades
@@ -26,8 +26,10 @@ const Checkout = () => {
         nombre: "",
         telefono: "",
         correo: "",
+        confirmarCorreo: "",
     });
     const [orderId, setOrderId] = useState(null);
+    const [isFormValid, setIsFormValid] = useState(false);
 
     // Hook para la navegación programática
     const navigate = useNavigate();
@@ -36,6 +38,15 @@ const Checkout = () => {
     const saveDataInput = (event) => {
         setDatosForm({ ...datosForm, [event.target.name]: event.target.value });
     };
+
+    // Validar formulario cada vez que cambian los datos del formulario
+    useEffect(() => {
+        const validate = async () => {
+            const response = await validateForm(datosForm);
+            setIsFormValid(response.status === "success");
+        };
+        validate();
+    }, [datosForm]);
 
     // Función para manejar el envío de la orden
     const enviarOrden = async (event) => {
@@ -104,6 +115,7 @@ const Checkout = () => {
                     datosForm={datosForm}
                     saveDataInput={saveDataInput}
                     enviarOrden={enviarOrden}
+                    isFormValid={isFormValid}
                 />
             )}
         </div>
@@ -111,5 +123,4 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
 
