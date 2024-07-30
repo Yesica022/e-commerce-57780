@@ -129,7 +129,7 @@ const products = [
     name: "Alfombra Yoga",
     description:
       "Mejora tu práctica de yoga con nuestra alfombra de alta calidad",
-    image: "/tools/alfombra.svg",
+    image: "/Alfombra.svg",
     stock: 12,
     category: "accesorios",
     price: 80000, // Precio en COP
