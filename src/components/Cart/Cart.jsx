@@ -12,7 +12,7 @@ const Cart = () => {
   if (cart.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <img src="/src/img/emptyCart.jpg" alt="Carrito vacío" className="w-64 h-auto mb-4" />
+        <img src="/emptyCart.jpg" alt="Carrito vacío" className="w-64 h-auto mb-4" />
         <p className="text-center text-xl font-semibold text-gray-600">Por acá no hay nada 🥲</p>
         <Link to="/" className="inline-block mt-8 px-6 py-2 border-2 border-teal-600 text-teal-600 font-medium text-sm leading-tight rounded-lg hover:bg-teal-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
           Ir a los productos
