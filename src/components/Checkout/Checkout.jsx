@@ -14,7 +14,7 @@ import { collection, addDoc } from "firebase/firestore";
 
 // Importaciones de animaciones y notificaciones
 import Lottie from 'react-lottie';
-import successAnimation from '/src/img/animations/successOrder.json';
+import successAnimation from '/successOrder.json';
 import { toast } from "react-toastify";
 
 const Checkout = () => {
